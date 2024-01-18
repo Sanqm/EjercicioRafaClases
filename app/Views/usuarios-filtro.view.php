@@ -110,8 +110,9 @@
                 <table id="tabladatos" class="table table-striped">                    
                     <thead>
                         <tr>
+                            <?php $orden = isset($_GET['orden']);?>
                             <th><a href="/usuarios?ordenar=<?php echo urlencode($valor="username"); ?> 
-                                   & metodo=<?php echo urlencode($orden = " ASC");?>">Nombre usuario</a></th>
+                                   & metodo=<?php echo urlencode($orden ==" ASC")? "ASC" : "DESC";?>">Nombre usuario</a></th>
                             <th><a href="/usuarios?ordenar=<?php echo urlencode($valor="nombre_rol"); ?> ">Rol</a></th>
                             <th><a href="/usuarios?ordenar=<?php echo urlencode($valor="SalarioBruto"); ?> ">Salario Bruto</a></th>
                             <th><a href="/usuarios?ordenar=<?php echo urlencode($valor="retencionIRPF"); ?> ">Retención</a></th>

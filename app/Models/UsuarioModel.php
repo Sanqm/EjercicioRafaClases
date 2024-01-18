@@ -41,7 +41,7 @@ class UsuarioModel extends \Com\Daw2\Core\BaseDbModel {
     function filter(array $filtros): array {
         $condiciones = [];
         $vars = [];
-        $metodo="";
+        $metodo = "";
         $ordenado = " username";
 
         if (!empty($filtros['id_rol']) && filter_var($filtros['id_rol'], FILTER_VALIDATE_INT)) {
@@ -82,27 +82,19 @@ class UsuarioModel extends \Com\Daw2\Core\BaseDbModel {
             $vars = array_merge($vars, $bind);
         }
 
-        if (isset($filtros['ordenar']) ) {
+        if (isset($filtros['ordenar'])) {
             $ordenado = $filtros['ordenar'];
-            if(isset($filtros['orden'])== " ASC" && !$this->cambioOrdenacion ){
-                $metodo = " ASC";
-                $this->cambioOrdenacion = true;
-            }else{
-                $metodo = " DESC";
-                $this->cambioOrdenacion = false;
-                
-            }
-              
+
         }
 
-        
+
 
 
         if (empty($condiciones)) {
             $query = self::SELECT_FROM . " ORDER BY $ordenado" . "$metodo";
             return $this->pdo->query($query)->fetchAll();
         } else {
-            $query = self::SELECT_FROM . " WHERE " . implode(" AND ", $condiciones . " ORDER BY $ordenado" . "$metodo");
+            $query = self::SELECT_FROM . " WHERE " . implode(" AND ", $condiciones) . " ORDER BY $ordenado" . "$metodo";
             return $this->executeQuery($query, $vars);
         }
     }
